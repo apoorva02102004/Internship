@@ -1,0 +1,54 @@
+class InstagramAccount:
+    def __init__(self, account_name, password):
+        # Public variable
+        self.account_name = account_name
+
+        # Protected variable
+        self._private_reels = []
+
+        # Private variables
+        self.__archived_reels = []
+        self.__password = password
+
+    # 1. Add private reel
+    def add_private_reel(self, reel_name):
+        self._private_reels.append(reel_name)
+        print(f"Private reel '{reel_name}' added.")
+
+    # 2. Display private reels
+    def display_private_reels(self, is_follower):
+        if is_follower:
+            print("Private Reels:")
+            for reel in self._private_reels:
+                print("-", reel)
+        else:
+            print("Access Denied! Only followers can view private reels")
+
+    # 3. Add archived reel
+    def add_archived_reel(self, reel_name):
+        self.__archived_reels.append(reel_name)
+        print(f"Archived reel '{reel_name}' added.")
+
+    # 4. Display archived reels
+    def display_archived_reels(self, password):
+        if password == self.__password:
+            print("Archived Reels:")
+            for reel in self.__archived_reels:
+                print("-", reel)
+        else:
+            print("Access Denied! Only account holder can view archived reels")
+
+    # 5. Getter method for archived reels
+    def get_archived_reels(self, password):
+        if password == self.__password:
+            return self.__archived_reels
+        else:
+            return "Access Denied!"
+
+    # 6. Setter method to update password
+    def set_password(self, old_password, new_password):
+        if old_password == self.__password:
+            self.__password = new_password
+            print("Password updated successfully!")
+        else:
+            print("Wrong old password!")
