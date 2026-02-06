@@ -1,50 +1,49 @@
-class InstagramAccount:
-    def __init__(self, account_name, password):
-        # Public variable
-        self.account_name = account_name
-        
-        # Protected variable
-        self._private_reels = []
-        
-        # Private variable
-        self.__archived_reels = []
-        
-        # Private password
-        self.__password = password
-
-    # 1. Add private reel
-    def add_private_reel(self, reel_name):
-        self._private_reels.append(reel_name)
-
-    # 2. Display private reels
-    def display_private_reels(self, is_follower):
-        if is_follower:
-            print("Private Reels:", self._private_reels)
+class Instagram:
+    def __init__(self,title, description,creator_name,location):    
+        self.title = title
+        self.description = description
+        self.likes = 0
+        self.creator_name = creator_name
+        self.location = location
+        self.comments = []
+    def display_title(self):
+        print("The title of the reel is ",self.title)
+    def display_description(self):
+        print("The description of the reel is ",self.description)
+    def display_likes(self):
+        print("The likes of the reel is ",self.likes)
+    def liked(self):
+        self.likes += 1
+    def disliked(self):
+        if self.likes > 0:
+            self.likes-=1
+    def display_creator_name(self):
+        print("The creator name is ",self.creator_name)
+    def display_location(self):
+        print("The location is ",self.location)
+    def display_comment(self):
+        if len(self.comments) == 0:
+            print("No comments yet")
         else:
-            print("Access Denied! Only followers can view private reels")
+            print("The comments are ")
+            for comment in self.comments:
+                print("-",comment)
+    def add_comments(self,comment):
+        self.comments.append(comment)
+    def delete_last_comment(self):
+        temp_comment=self.comments.pop()
+        print("The last comment is deleted ",temp_comment)
 
-    # 3. Add archived reel
-    def add_archived_reel(self, reel_name):
-        self.__archived_reels.append(reel_name)
 
-    # 4. Display archived reels
-    def display_archived_reels(self, password):
-        if password == self.__password:
-            print("Archived Reels:", self.__archived_reels)
-        else:
-            print("Access Denied! Only account holder can view archived reels")
+reel1=Instagram("dancing","dancing with friends","John","New York")
+reel1.add_comments("comment1")
+reel1.display_comment()
+reel1.delete_last_comment()
+reel1.display_comment()
 
-    # 5. Getter method for archived reels
-    def get_archived_reels(self, password):
-        if password == self.__password:
-            return self.__archived_reels
-        else:
-            return "Access Denied!"
-
-    # 6. Setter method to update password
-    def set_password(self, old_password, new_password):
-        if old_password == self.__password:
-            self.__password = new_password
-            print("Password updated successfully")
-        else:
-            print("Wrong password! Cannot update")
+# reel2=Instagram("finance minister conference","finance minister conference with friends","Jane","London")
+# reel1.display_title()
+# reel1.display_description()
+# reel1.display_creator_name()
+# reel1.display_location()
+# reel1.display_comment()
