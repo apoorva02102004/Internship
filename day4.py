@@ -1,28 +1,38 @@
-# Create object
-insta = InstagramAccount("bhuvana_official", "insta123")
+class InstagramAccount:
+    def __init__(self, username, password):
+        self.username = username
+        self.__password = password          # private variable
+        self.private_reels = []
+        self.archived_reels = []
 
-# Add private reels
-insta.add_private_reel("Vacation Reel")
-insta.add_private_reel("Birthday Reel")
+    # Add private reel
+    def add_private_reel(self, reel):
+        self.private_reels.append(reel)
 
-# Add archived reels
-insta.add_archived_reel("Old Memories")
-insta.add_archived_reel("College Days")
+    # Add archived reel
+    def add_archived_reel(self, reel):
+        self.archived_reels.append(reel)
 
-print("\n--- Private Reels as Follower ---")
-insta.display_private_reels(True)
+    # Display private reels (only for followers)
+    def display_private_reels(self, is_follower):
+        if is_follower:
+            for reel in self.private_reels:
+                print(reel)
+        else:
+            print("Follow to see private reels.")
 
-print("\n--- Private Reels as Non-Follower ---")
-insta.display_private_reels(False)
+    # Display archived reels (password protected)
+    def display_archived_reels(self, password):
+        if password == self.__password:
+            for reel in self.archived_reels:
+                print(reel)
+        else:
+            print("Incorrect password! Cannot access archived reels.")
 
-print("\n--- Archived Reels (Correct Password) ---")
-insta.display_archived_reels("insta123")
-
-print("\n--- Archived Reels (Wrong Password) ---")
-insta.display_archived_reels("wrongpass")
-
-print("\n--- Update Password ---")
-insta.set_password("insta123", "newpass123")
-
-print("\n--- Archived Reels After Password Update ---")
-insta.display_archived_reels("newpass123")
+    # Update password
+    def set_password(self, old_password, new_password):
+        if old_password == self.__password:
+            self.__password = new_password
+            print("Password updated successfully.")
+        else:
+            print("Old password is incorrect.")
